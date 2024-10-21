@@ -5,25 +5,28 @@ Widget botton({
   String? name,
   double? width,
   double? height,
+  required VoidCallback onPressed, // Add this parameter
 }) {
   return ElevatedButton(
-      onPressed: () {},
-      style: ElevatedButton.styleFrom(
-          minimumSize: Size(width!, height!),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          backgroundColor: elementcolor),
-      child: Text(
-        name!,
-        style: const TextStyle(color: Color.fromARGB(255, 243, 243, 243)),
-      ));
+    onPressed: onPressed, // Use the onPressed parameter here
+    style: ElevatedButton.styleFrom(
+      minimumSize: Size(width!, height!),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      backgroundColor: elementcolor,
+    ),
+    child: Text(
+      name!,
+      style: const TextStyle(color: Color.fromARGB(255, 243, 243, 243)),
+    ),
+  );
 }
 
-Widget textboxfield(
-    {String? labeltext,
-    Widget? suffixIcon,
-    required TextEditingController emailController,
-    required context}) {
+Widget textboxfield({
+  String? labeltext,
+  Widget? suffixIcon,
+  required TextEditingController emailController,
+  required context,
+}) {
   return TextFormField(
     controller: emailController,
     decoration: InputDecoration(

@@ -1,74 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:registration_app/resources/components/color.dart';
 import 'package:registration_app/resources/components/textStyle.dart';
-import 'package:registration_app/view/profilepage.dart';
-import 'package:registration_app/view/registration_page.dart';
+import 'package:registration_app/view_model/notifier.dart';
 
-class User {
-  final String eventsname;
-  final String dateandtime;
-  final String thumbnail;
-  final String description;
-  final String organizer;
+import 'profilepage.dart';
+import 'registration_page.dart';
 
-  User(
-      {required this.thumbnail,
-      required this.dateandtime,
-      required this.eventsname,
-      required this.description,
-      required this.organizer});
-}
-
-// ignore: must_be_immutable
 class Eventlist extends StatelessWidget {
   Eventlist({super.key});
-  List<User> user = [
-    User(
-      organizer: 'Global Yuth Hub',
-      thumbnail:
-          'https://www.vcubesoftsolutions.com/wp-content/uploads/2023/11/image.jpg',
-      dateandtime: '2024-12-10',
-      eventsname: 'Youth empowerment Events',
-      description:
-          'Jeevan Raithis is free events which is going to be heldthis is free events which is going to be held',
-    ),
-    User(
-      organizer: 'Nec Education society',
-      thumbnail:
-          'https://www.vcubesoftsolutions.com/wp-content/uploads/2023/11/image.jpg',
-      dateandtime: '2024-12-10',
-      eventsname: 'Woman Health and Risks ',
-      description:
-          'Jeevan Raithis is free events which is going to be heldthis is free events which is going to be heldthis is free events which is going to be held',
-    ),
-    User(
-      organizer: 'Global Yuth Hub',
-      thumbnail:
-          'https://www.excelptp.com/wp-content/uploads/2023/03/Flutter-Development-Course.jpg',
-      dateandtime: '2024-11-20',
-      eventsname: 'Music Nepal Events',
-      description:
-          ' o be heldthis is free events which is going to be heldthis is free events which is going to be held',
-    ),
-    User(
-      organizer: 'Shine Education',
-      thumbnail:
-          'https://www.excelptp.com/wp-content/uploads/2023/03/Flutter-Development-Course.jpg',
-      dateandtime: '2024-11-20',
-      eventsname: 'Flutter boot camps',
-      description: ' this is free events which is going to be held',
-    ),
-    User(
-      organizer: 'Global Yuth Hub',
-      thumbnail:
-          'https://www.excelptp.com/wp-content/uploads/2023/03/Flutter-Development-Course.jpg',
-      dateandtime: '2024-11-20',
-      eventsname: 'Flutter boot camps',
-      description: ' this is free events which is going to be held',
-    ),
-  ];
+
   @override
   Widget build(BuildContext context) {
+    final eventModel = Provider.of<EventModel>(context);
+
     return Scaffold(
       appBar: AppBar(
           actions: [
@@ -85,14 +30,14 @@ class Eventlist extends StatelessWidget {
           toolbarHeight: 80,
           shadowColor: Colors.white,
           backgroundColor: elementcolor,
-          title: subtitleText(name: 'Events List')),
+          title: subtitleText(name: 'Upcoming Events')),
       body: Container(
           padding: const EdgeInsets.all(9),
           color: themecolor,
           child: ListView.builder(
-            itemCount: user.length,
-            itemBuilder: ((context, index) {
-              final users = user[index];
+            itemCount: eventModel.users.length, // Use the model's user list
+            itemBuilder: (context, index) {
+              final user = eventModel.users[index];
               return Card(
                 color: elementcolor,
                 semanticContainer: true,
@@ -113,7 +58,7 @@ class Eventlist extends StatelessWidget {
                               fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          users.eventsname,
+                          user.eventsname,
                           style: const TextStyle(
                               color: Color.fromARGB(255, 255, 255, 255),
                               fontSize: 18,
@@ -124,9 +69,7 @@ class Eventlist extends StatelessWidget {
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height / 80,
-                        ),
+                        const SizedBox(height: 5),
                         Row(
                           children: [
                             const Text(
@@ -137,7 +80,7 @@ class Eventlist extends StatelessWidget {
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              users.organizer,
+                              user.organizer,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.justify,
@@ -157,7 +100,7 @@ class Eventlist extends StatelessWidget {
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              users.dateandtime,
+                              user.dateandtime,
                               style: const TextStyle(
                                   color: Color.fromARGB(255, 42, 252, 10),
                                   fontSize: 14,
@@ -202,7 +145,7 @@ class Eventlist extends StatelessWidget {
                             title: Align(
                               alignment: Alignment.center,
                               child: Text(
-                                ' ${users.eventsname}',
+                                ' ${user.eventsname}',
                                 style: const TextStyle(
                                   fontSize: 16,
                                   color: Color.fromARGB(255, 159, 202, 245),
@@ -212,14 +155,10 @@ class Eventlist extends StatelessWidget {
                             content: SingleChildScrollView(
                               child: ListBody(
                                 children: <Widget>[
-                                  Image.network(users.thumbnail),
+                                  Image.network(user.thumbnail),
                                   Column(
                                     children: [
-                                      SizedBox(
-                                        height:
-                                            MediaQuery.of(context).size.height /
-                                                55,
-                                      ),
+                                      const SizedBox(height: 10),
                                       const Text(
                                         'Description : ',
                                         style: TextStyle(
@@ -229,7 +168,7 @@ class Eventlist extends StatelessWidget {
                                             fontWeight: FontWeight.bold),
                                       ),
                                       Text(
-                                        ' ${users.description}',
+                                        ' ${user.description}',
                                         textAlign: TextAlign.justify,
                                         style: const TextStyle(
                                             color: Colors.white),
@@ -248,7 +187,7 @@ class Eventlist extends StatelessWidget {
                                             fontWeight: FontWeight.bold),
                                       ),
                                       Text(
-                                        users.dateandtime,
+                                        user.dateandtime,
                                         style: const TextStyle(
                                             color: Color.fromARGB(
                                                 255, 253, 253, 21),
@@ -278,7 +217,7 @@ class Eventlist extends StatelessWidget {
                   ),
                 ),
               );
-            }),
+            },
           )),
     );
   }
