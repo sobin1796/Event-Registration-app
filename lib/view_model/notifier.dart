@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:registration_app/model/Eventmodel.dart';
 
 class RegistrationProvider extends ChangeNotifier {
   String _name = '';
@@ -39,6 +40,9 @@ class RegistrationProvider extends ChangeNotifier {
   String get comments => _comments;
   String? get selectedEvent => _selectedEvent;
   DateTime? get selectedDate => _selectedDate;
+
+  // Getter to access available events from EventModel
+  List<User> get availableEvents => EventModel().users;
 
   void updateSelectedEvent(String? event) {
     _selectedEvent = event;
@@ -105,31 +109,16 @@ class ProfileProvider with ChangeNotifier {
   }
 }
 
-class User {
-  final String eventsname;
-  final String dateandtime;
-  final String thumbnail;
-  final String description;
-  final String organizer;
-
-  User({
-    required this.thumbnail,
-    required this.dateandtime,
-    required this.eventsname,
-    required this.description,
-    required this.organizer,
-  });
-}
-
 class EventModel extends ChangeNotifier {
-  List<User> _users = [
+  final List<User> _users = [
     User(
       organizer: 'Global Youth Hub',
       thumbnail:
           'https://www.shutterstock.com/shutterstock/photos/2160662015/display_1500/stock-vector-international-youth-day-is-observed-every-year-on-august-the-purpose-of-the-day-is-to-draw-2160662015.jpg',
       dateandtime: '2024-12-10',
       eventsname: 'Youth empowerment Events',
-      description: 'Jeevan Raithis is free events which is going to be held.',
+      description:
+          'Global Youth Hubis free events which is going to be held. Do Not Miss the oppoertuniy. ',
     ),
     User(
       organizer: 'Nec Education society',

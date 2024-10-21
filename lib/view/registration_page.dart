@@ -3,7 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:registration_app/resources/components/color.dart';
 import 'package:registration_app/resources/components/commoncomponent.dart';
 import 'package:registration_app/resources/components/textStyle.dart';
+import 'package:registration_app/view/SuccesFullRegistration.dart';
 import 'package:registration_app/view_model/notifier.dart';
+
+import '../model/Eventmodel.dart';
 
 class Eventregistration extends StatelessWidget {
   const Eventregistration({super.key});
@@ -71,11 +74,11 @@ class Eventregistration extends StatelessWidget {
                         child: DropdownButton<String>(
                           hint: subtext(name: 'Select Event'),
                           value: provider.selectedEvent,
-                          items: ['Event 1', 'Event 2', 'Event 3']
-                              .map<DropdownMenuItem<String>>((String value) {
+                          items: provider.availableEvents
+                              .map<DropdownMenuItem<String>>((User user) {
                             return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
+                              value: user.eventsname.substring(0, 5),
+                              child: Text(user.eventsname.substring(0, 12)),
                             );
                           }).toList(),
                           onChanged: (String? newValue) {
@@ -155,7 +158,11 @@ class Eventregistration extends StatelessWidget {
                       } else if (provider.comments.isEmpty) {
                         _showSnackBar(context, 'Please add your comments.');
                       } else {
-                        _showSnackBar(context, 'Registration Successful');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const Succesfullregistration()));
                       }
                     },
                     name: 'Register',
