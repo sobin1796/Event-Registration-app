@@ -3,14 +3,14 @@ import 'package:registration_app/resources/components/color.dart';
 import 'package:registration_app/resources/components/commoncomponent.dart';
 import 'package:registration_app/resources/components/textStyle.dart';
 
-class Testpage extends StatefulWidget {
-  const Testpage({super.key});
+class Eventregistration extends StatefulWidget {
+  const Eventregistration({super.key});
 
   @override
-  State<Testpage> createState() => __TestPageState();
+  State<Eventregistration> createState() => __TestPageState();
 }
 
-class __TestPageState extends State<Testpage> {
+class __TestPageState extends State<Eventregistration> {
   DateTime? selectedDate;
   String? selectedValue;
   final List<String> events = ['Event 1', 'Event 2', 'Event 3'];
@@ -38,14 +38,22 @@ class __TestPageState extends State<Testpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.white),
+        backgroundColor: elementcolor,
+        title: const Text(
+          'Registration',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
       body: Container(
         color: themecolor,
         padding: const EdgeInsets.all(30),
         child: Column(
           children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 20,
-            ),
+            // SizedBox(
+            //   height: MediaQuery.of(context).size.height / 20,
+            // ),
             Align(
                 alignment: Alignment.centerLeft,
                 child: titleText(name: 'Event Registration')),
@@ -92,32 +100,17 @@ class __TestPageState extends State<Testpage> {
             SizedBox(
               height: MediaQuery.of(context).size.height / 55,
             ),
-            // TextFormField(
-            //   controller: _passwordController,
-            //   decoration: InputDecoration(
-            //     border: const UnderlineInputBorder(),
-            //     labelText: 'Password',
-            //     suffixIcon: IconButton(
-            //       icon: Icon(
-            //         _obscureText ? Icons.visibility : Icons.visibility_off,
-            //         color: const Color.fromARGB(255, 65, 60, 75),
-            //       ),
-            //       onPressed: () {
-            //         setState(() {
-            //           _obscureText = !_obscureText;
-            //         });
-            //       },
-            //     ),
-            //   ),
-            //   style: const TextStyle(color: Colors.white),
-            // ),
+
             const SizedBox(
               height: 20,
             ),
             Align(
                 alignment: Alignment.centerLeft,
-                child: subtext(name: 'Select Events and Date')),
-            const Divider(),
+                child: subtext(name: 'Select Events and Date :')),
+            const Divider(
+              thickness: 2,
+              color: elementcolor,
+            ),
             SizedBox(
               height: MediaQuery.of(context).size.height / 55,
             ),
@@ -167,7 +160,7 @@ class __TestPageState extends State<Testpage> {
 
             Align(
                 alignment: Alignment.centerLeft,
-                child: subtext(name: 'Type your comments below.')),
+                child: subtext(name: 'Type your comments below :')),
             SizedBox(
               height: MediaQuery.of(context).size.height / 55,
             ),

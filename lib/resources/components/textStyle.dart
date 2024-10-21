@@ -19,7 +19,9 @@ Widget subtitleText({
   return Text(
     name!,
     style: const TextStyle(
-        color: elementcolor, fontSize: 24, fontWeight: FontWeight.bold),
+        color: Color.fromARGB(255, 255, 255, 255),
+        fontSize: 24,
+        fontWeight: FontWeight.bold),
   );
 }
 

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MyDatePicker extends StatefulWidget {
+  const MyDatePicker({super.key});
+
   @override
   _MyDatePickerState createState() => _MyDatePickerState();
 }
@@ -27,7 +29,7 @@ class _MyDatePickerState extends State<MyDatePicker> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Date Picker Example'),
+        title: const Text('Date Picker Example'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -40,7 +42,7 @@ class _MyDatePickerState extends State<MyDatePicker> {
                 hintText: selectedDate == null
                     ? 'Select Date'
                     : 'Selected Date: ${selectedDate!.toLocal()}'.split(' ')[0],
-                suffixIcon: Icon(Icons.calendar_today),
+                suffixIcon: const Icon(Icons.calendar_today),
               ),
               onTap: () => _pickDate(context),
             ),
